@@ -7,6 +7,7 @@
 
 .todos__title {
   margin: 2% 0;
+  color: var(--primaryColor);
 }
 
 #todo__container {
