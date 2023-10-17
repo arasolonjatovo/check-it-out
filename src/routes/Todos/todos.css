@@ -1,8 +1,7 @@
-.todos__container {
+.todos_header {
   text-align: center;
-  margin-top: 10%;
   max-width: 1250px;
-  margin: 0 auto;
+  margin: 5% auto 0;
   padding: 2rem;
 }
 
