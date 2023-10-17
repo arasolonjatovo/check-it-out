@@ -15,7 +15,6 @@ export default function Gestion() {
       setNewTask('')
     }
   }
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
   const deleteTask = (taskId) => {
     const updatedTasks = tasks.filter((task) => task.id !== taskId)
@@ -30,6 +29,10 @@ export default function Gestion() {
       return task
     })
     setTasks(updatedTasks)
+  }
+
+  const handleFilterClick = (filterType) => {
+    setFilter(filterType)
   }
 
   const filteredTasks = tasks.filter((task) => {
@@ -61,15 +64,18 @@ export default function Gestion() {
         <div className="filterBtn">
           <Button
             label="Toutes les tâches"
-            handleClick={() => setFilter('all')}
+            handleClick={() => handleFilterClick('all')}
+            variant={filter === 'all' ? 'primary' : 'secondary'}
           />
           <Button
+            variant={filter === 'completed' ? 'primary' : 'secondary'}
             label="Tâches complétées"
-            handleClick={() => setFilter('completed')}
+            handleClick={() => handleFilterClick('completed')}
           />
           <Button
+            variant={filter === 'uncompleted' ? 'primary' : 'secondary'}
             label="Tâches non complétées"
-            handleClick={() => setFilter('uncompleted')}
+            handleClick={() => handleFilterClick('uncompleted')}
           />
         </div>
 
@@ -83,16 +89,19 @@ export default function Gestion() {
               >
                 {task.text}
               </span>
-              <input
-                type="checkbox"
-                {...label}
-                checked={task.completed}
-                onChange={() => toggleTaskCompletion(task.id)}
-              />
-              <Button
-                label="Supprimer"
-                handleClick={() => deleteTask(task.id)}
-              />
+              <span className="deleteCheck">
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  className="checkbox-input"
+                  onChange={() => toggleTaskCompletion(task.id)}
+                />
+                <Button
+                  variant="primary"
+                  label="Supprimer"
+                  handleClick={() => deleteTask(task.id)}
+                />
+              </span>
             </li>
           ))}
         </ul>

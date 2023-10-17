@@ -22,3 +22,22 @@
   gap: 1rem;
   justify-content: center;
 }
+
+.todo ul {
+  margin-top: 3rem;
+}
+
+.todo ul li {
+  list-style: none;
+  border-bottom: 1px rgb(198, 198, 198) solid;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 5rem;
+  align-items: center;
+  background: rgb(248, 248, 248);
+}
+
+.deleteCheck {
+  display: flex;
+  gap: 2rem;
+}
