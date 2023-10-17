@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 
 import Header from '../../layout/Header/Header'
+import Auth from '../Auth/Auth'
 
 export default function Root() {
   return (
