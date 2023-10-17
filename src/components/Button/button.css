@@ -10,7 +10,7 @@
 }
 
 .button.primary {
-  background-color: var(--linearGradient);
+  background: var(--linearGradient);
   color: white;
 }
 
