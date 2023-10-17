@@ -32,7 +32,12 @@
 
 .text-login {
     font-size: 12px;
-    padding-left: 130px;
+    margin-left: 130px;
+}
+
+.text-login:hover {
+    cursor: pointer;
+    color: rgba(87, 43, 121, 0.7);
 }
 
 .containerLogin input {
@@ -43,3 +48,26 @@
     margin-top: 10px;
     padding: 10px 100px;
 }
+
+.containerLogin Button:hover  {
+    background-color: rgba(87, 43, 121, 0.7);
+ }
+
+ @media only screen and (max-width: 600px) {
+    .containerTitle {
+      display: none;
+    }
+  
+    .text-login {
+      padding-left: 10px;
+    }
+  
+    .containerLogin Button {
+      padding: 10px 50px;
+      color: white; /* Couleur du texte du bouton en mode mobile */
+    }
+  
+    .containerLogin {
+      height: 100vh;
+    }
+  } 
