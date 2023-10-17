@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Tasks.css'
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
@@ -11,15 +11,18 @@ export default function Gestion() {
   const addTask = () => {
     if (newTask) {
       const taskId = new Date().getTime()
-      setTasks([{ id: taskId, text: newTask, completed: false }, ...tasks])
+      const newTaskItem = { id: taskId, text: newTask, completed: false }
+      const updatedTasks = [newTaskItem, ...tasks]
+      setTasks(updatedTasks)
       setNewTask('')
+      saveTasksToLocalStorage(updatedTasks)
     }
   }
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
   const deleteTask = (taskId) => {
     const updatedTasks = tasks.filter((task) => task.id !== taskId)
     setTasks(updatedTasks)
+    saveTasksToLocalStorage(updatedTasks)
   }
 
   const toggleTaskCompletion = (taskId) => {
@@ -30,6 +33,11 @@ export default function Gestion() {
       return task
     })
     setTasks(updatedTasks)
+    saveTasksToLocalStorage(updatedTasks)
+  }
+
+  const handleFilterClick = (filterType) => {
+    setFilter(filterType)
   }
 
   const filteredTasks = tasks.filter((task) => {
@@ -41,6 +49,21 @@ export default function Gestion() {
       return true
     }
   })
+
+  const saveTasksToLocalStorage = (tasks) => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }
+
+  const getTasksFromLocalStorage = () => {
+    const storedTasks = localStorage.getItem('tasks')
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks))
+    }
+  }
+
+  useEffect(() => {
+    getTasksFromLocalStorage()
+  }, [])
 
   return (
     <>
@@ -55,21 +78,24 @@ export default function Gestion() {
             onChange={(e) => setNewTask(e.target.value)}
           />
 
-          <Button label="ADD" handleClick={addTask} variant="secondary" />
+          <Button label="ADD" handleClick={addTask} variant="primary" />
         </div>
 
         <div className="filterBtn">
           <Button
             label="Toutes les tâches"
-            handleClick={() => setFilter('all')}
+            handleClick={() => handleFilterClick('all')}
+            variant={filter === 'all' ? 'primary' : 'secondary'}
           />
           <Button
+            variant={filter === 'completed' ? 'primary' : 'secondary'}
             label="Tâches complétées"
-            handleClick={() => setFilter('completed')}
+            handleClick={() => handleFilterClick('completed')}
           />
           <Button
+            variant={filter === 'uncompleted' ? 'primary' : 'secondary'}
             label="Tâches non complétées"
-            handleClick={() => setFilter('uncompleted')}
+            handleClick={() => handleFilterClick('uncompleted')}
           />
         </div>
 
@@ -83,16 +109,19 @@ export default function Gestion() {
               >
                 {task.text}
               </span>
-              <input
-                type="checkbox"
-                {...label}
-                checked={task.completed}
-                onChange={() => toggleTaskCompletion(task.id)}
-              />
-              <Button
-                label="Supprimer"
-                handleClick={() => deleteTask(task.id)}
-              />
+              <span className="deleteCheck">
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  className="checkbox-input"
+                  onChange={() => toggleTaskCompletion(task.id)}
+                />
+                <Button
+                  variant="primary"
+                  label="Supprimer"
+                  handleClick={() => deleteTask(task.id)}
+                />
+              </span>
             </li>
           ))}
         </ul>
