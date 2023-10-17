@@ -9,12 +9,12 @@
 }
 
 .button.primary {
-  background-color: #700060;
+  background-color: var(--primaryColor);
   color: white;
 }
 
 .button.secondary {
-  border: #700060 2px solid;
-  color: #700060;
+  border: var(--primaryColor) 2px solid;
+  color: var(--primaryColor);
   background-color: transparent;
 }
