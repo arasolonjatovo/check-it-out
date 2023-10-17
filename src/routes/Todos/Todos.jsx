@@ -14,6 +14,9 @@ export default function Todos() {
       </header>
       <div id="todo__container">
         <Todo />
+        <Todo />
+        <Todo />
+        <Todo />
       </div>
     </>
   )
