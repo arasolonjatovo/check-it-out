@@ -1,0 +1,11 @@
+.todos__container {
+  text-align: center;
+  margin-top: 10%;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.todos__title {
+  margin: 2% 0;
+}
