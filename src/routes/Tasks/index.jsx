@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Tasks.css'
 import Button from '../../components/Button/Button'
+import InputText from '../../components/InputText/InputText'
 
 export default function Gestion() {
   const [tasks, setTasks] = useState([])
@@ -47,12 +48,11 @@ export default function Gestion() {
         <h1>MY TO-DO</h1>
 
         <div className="addTask">
-          <input
-            id="outlined-basic"
+          <InputText
+            desc="New task"
+            type="text"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
-            label="Nouvelle tâche"
-            variant="outlined"
           />
 
           <Button label="ADD" handleClick={addTask} variant="second" />
