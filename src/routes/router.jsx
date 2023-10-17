@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 import Root from './Root/Root'
+import Todos from './Todos/Todos'
 import ErrorPage from './ErrorPage/ErrorPage'
 
 const routes = [
@@ -10,9 +11,10 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/',
-      }
-    ]
+        path: '/todos',
+        element: <Todos />,
+      },
+    ],
   },
 ]
 
