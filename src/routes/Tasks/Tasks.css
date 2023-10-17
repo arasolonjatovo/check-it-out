@@ -1,0 +1,16 @@
+.todo {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.todo h1 {
+  color: var(--primaryColor);
+  margin-bottom: 3rem;
+}
+
+.filterBtn {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 3rem;
+}
