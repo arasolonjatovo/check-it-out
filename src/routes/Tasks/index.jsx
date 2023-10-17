@@ -55,7 +55,7 @@ export default function Gestion() {
             onChange={(e) => setNewTask(e.target.value)}
           />
 
-          <Button label="ADD" handleClick={addTask} variant="second" />
+          <Button label="ADD" handleClick={addTask} variant="secondary" />
         </div>
 
         <div className="filterBtn">
