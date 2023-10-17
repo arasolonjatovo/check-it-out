@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 
 import Root from './Root/Root'
 import ErrorPage from './ErrorPage/ErrorPage'
+import Tasks from './Tasks/'
 
 const routes = [
   {
@@ -11,8 +12,12 @@ const routes = [
     children: [
       {
         path: '/',
-      }
-    ]
+      },
+      {
+        path: '/tasks:id',
+        element: <Tasks />,
+      },
+    ],
   },
 ]
 
