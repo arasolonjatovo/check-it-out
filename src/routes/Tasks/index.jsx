@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Tasks.css'
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
@@ -11,14 +11,18 @@ export default function Gestion() {
   const addTask = () => {
     if (newTask) {
       const taskId = new Date().getTime()
-      setTasks([{ id: taskId, text: newTask, completed: false }, ...tasks])
+      const newTaskItem = { id: taskId, text: newTask, completed: false }
+      const updatedTasks = [newTaskItem, ...tasks]
+      setTasks(updatedTasks)
       setNewTask('')
+      saveTasksToLocalStorage(updatedTasks)
     }
   }
 
   const deleteTask = (taskId) => {
     const updatedTasks = tasks.filter((task) => task.id !== taskId)
     setTasks(updatedTasks)
+    saveTasksToLocalStorage(updatedTasks)
   }
 
   const toggleTaskCompletion = (taskId) => {
@@ -29,6 +33,7 @@ export default function Gestion() {
       return task
     })
     setTasks(updatedTasks)
+    saveTasksToLocalStorage(updatedTasks)
   }
 
   const handleFilterClick = (filterType) => {
@@ -44,6 +49,21 @@ export default function Gestion() {
       return true
     }
   })
+
+  const saveTasksToLocalStorage = (tasks) => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }
+
+  const getTasksFromLocalStorage = () => {
+    const storedTasks = localStorage.getItem('tasks')
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks))
+    }
+  }
+
+  useEffect(() => {
+    getTasksFromLocalStorage()
+  }, [])
 
   return (
     <>
