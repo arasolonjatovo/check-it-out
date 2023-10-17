@@ -1,0 +1,24 @@
+.todo {
+  max-width: 1250px;
+  margin: 3rem auto 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.todo h1 {
+  color: var(--primaryColor);
+  margin-bottom: 3rem;
+}
+
+.filterBtn {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.addTask {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
