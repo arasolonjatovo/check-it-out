@@ -1,26 +1,13 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import privateRoute from './privateRoute'
+import routes from './routes'
 
-import Root from './Root/Root'
-import Todos from './Todos/Todos'
-import ErrorPage from './ErrorPage/ErrorPage'
-import Tasks from './Tasks/'
+const isLogin = true
 
-const routes = [
-  {
-    path: '/',
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/todos',
-        element: <Todos />,
-      },
-      {
-        path: '/tasks:id',
-        element: <Tasks />,
-      },
-    ],
-  },
-]
-
-export const router = createBrowserRouter(routes)
+export default function App() {
+  const router = createBrowserRouter([
+    isLogin ? privateRoute() : {},
+    ...routes(),
+  ])
+  return <RouterProvider router={router} />
+}
