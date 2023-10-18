@@ -31,7 +31,7 @@ export default function Header() {
         <p className="navbar__name">❐ Check-It-Out</p>
         <ul className="nav__list">
           <li className="nav__item">
-            <Link to="/todos">MY TODOS</Link>
+            <Link to="/todo">MY TODOS</Link>
           </li>
           <li className="nav__item">
             <Link to="/signIn" onClick={logout}>
