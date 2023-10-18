@@ -2,6 +2,16 @@
 
 Le but du projet est d'implémenter un système de TODO List partagée.
 
+## Comptes de test
+
+1er compte
+email : blabla@gmail.com
+mdp : azertyuiop
+
+2ème compte
+email : kk@gmail.com
+mdp : azertyuiop
+
 ## Aperçu du projet
 
 Page d'authentification
