@@ -4,7 +4,19 @@ Le but du projet est d'implémenter un système de TODO List partagée.
 
 ## Aperçu du projet
 
-Ajouter une photo ....
+Page d'authentification
+![check-it-out-login](https://github.com/arasolonjatovo/check-it-out/assets/119492186/9ded299f-12e7-47e1-926e-74bb792ce90e)
+
+
+
+Page regroupant toutes les to-do-list
+![check-it-out-todos](https://github.com/arasolonjatovo/check-it-out/assets/119492186/c9703034-50a7-4bd1-9fa1-0b5f33e8f539)
+
+
+
+Page représentant une to-do-list
+![check-it-out-todolist](https://github.com/arasolonjatovo/check-it-out/assets/119492186/9818030b-2bb8-46db-aa4a-062dffb6088b)
+
 
 ## Lancer le projet en local
 
@@ -51,4 +63,5 @@ Démarrer le serveur
 -  Lucas Miranda [@mirandalucas52](https://github.com/mirandalucas52)
 -  Léo Sun [@Feydai](https://github.com/Feydai)
 -  Audrey Rasolonjatovo [@arasolonjatovo](https://www.github.com/arasolonjatovo)
+-  Kylian REKIK [@DreaDrea8](https://github.com/DreaDrea8)
 

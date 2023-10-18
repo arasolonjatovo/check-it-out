@@ -1,23 +1,16 @@
-import React from 'react'
+import React, { useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import Root from './Root/Root'
-import Todos from './Todos/Todos'
-import Tasks from './Tasks'
-import ErrorPage from './ErrorPage/ErrorPage'
+import { UserContext } from '../context/userContext'
 
-export default function privateRoute() {
-  return {
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/',
-        element: <Todos />,
-      },
-      {
-        path: '/todo:id',
-        element: <Tasks />,
-      },
-    ],
-  }
+export default function PrivateRoute(props) {
+  const { userID } = useContext(UserContext)
+  const navigation = useNavigate()
+
+  useEffect(() => {
+    //if the userID isn't as its default state it means that the user is connected
+    if (userID === 'null') navigation('/signIn')
+  }, [userID, navigation])
+
+  return <>{props.children}</>
 }

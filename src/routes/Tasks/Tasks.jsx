@@ -53,7 +53,9 @@ export default function Tasks() {
   const deleteTask = (taskId) => {
     // Supprime la tâche de la base de données
     try {
+
       deleteDoc(doc(db, 'visu-tasks', taskId))
+
     } catch (error) {
       console.error('Erreur lors de la suppression de la tâche :', error)
     }

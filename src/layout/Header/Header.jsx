@@ -1,9 +1,30 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+
+import { auth } from '../../firebase/firebase'
+import { useNavigate } from 'react-router-dom'
+
+import { UserContext } from '../../context/userContext'
 
 import './header.css'
 
 export default function Header() {
+  const navigation = useNavigate()
+  const { setUserEmail, setUserID } = useContext(UserContext)
+
+  const logout = () => {
+    auth
+      .signOut()
+      .then(() => {
+        setUserEmail('null')
+        setUserID('null')
+        navigation('/signIn')
+      })
+      .catch((error) => {
+        console.error('Une erreur est survenue:', error)
+      })
+  }
+
   return (
     <header>
       <nav className="navbar">
@@ -13,7 +34,9 @@ export default function Header() {
             <Link to="/todos">MY TODOS</Link>
           </li>
           <li className="nav__item">
-            <Link to="/">Logout</Link>
+            <Link to="/signIn" onClick={logout}>
+              Logout
+            </Link>
           </li>
         </ul>
       </nav>
