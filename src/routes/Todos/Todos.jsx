@@ -82,7 +82,7 @@ export default function Todos() {
             index={index + 1}
             key={index}
             handleClick={() => {
-              navigate(`/todo/:${el.id}`, { param: el })
+              navigate(`/todo/${el.id}`, { param: el })
             }}
           />
         ))}
