@@ -1,23 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import Root from './Root/Root'
-import Todos from './Todos/Todos'
-import Tasks from './Tasks/Tasks'
-import ErrorPage from './ErrorPage/ErrorPage'
+export default function PrivateRoute(props) {
+  const [login, setLogin] = useState(false)
+  const navigation = useNavigate()
 
-export default function privateRoute() {
-  return {
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/',
-        element: <Todos />,
-      },
-      {
-        path: '/todo:id',
-        element: <Tasks />,
-      },
-    ],
-  }
+  useEffect(() => {
+    if (!login) navigation('/signIn')
+  }, [login])
+
+  return <>{props.children}</>
 }

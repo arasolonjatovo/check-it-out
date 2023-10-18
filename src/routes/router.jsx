@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
-import privateRoute from './privateRoute'
+
+import PrivateRoute from './PrivateRoute'
 
 import Root from './Root/Root'
 import ErrorPage from './ErrorPage/ErrorPage'
@@ -18,11 +19,19 @@ const routes = [
     children: [
       {
         path: '/todo',
-        element: <Todos />,
+        element: (
+          <PrivateRoute>
+            <Todos />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/todo:id',
-        element: <Tasks />,
+        element: (
+          <PrivateRoute>
+            <Tasks />
+          </PrivateRoute>
+        ),
       },
     ],
   },
