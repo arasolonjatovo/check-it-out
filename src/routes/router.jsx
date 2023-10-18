@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import PrivateRoute from './PrivateRoute'
+import PrivateRoute from './privateRoute'
 
 import Root from './Root/Root'
 import ErrorPage from './ErrorPage/ErrorPage'
