@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Tasks.css'
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
-import TodoEmailList from '../../components/TodoEmailList/'
+import TodoEmailList from '../../components/TodoEmailList'
 import { db } from '../../firebase/firebase'
 import {
   addDoc,
@@ -14,7 +14,7 @@ import {
   updateDoc,
 } from 'firebase/firestore'
 
-export default function Gestion() {
+export default function Tasks() {
   const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState('')
   const [filter, setFilter] = useState('all')
