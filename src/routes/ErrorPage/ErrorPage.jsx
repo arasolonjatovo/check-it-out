@@ -7,9 +7,18 @@ export default function ErrorPage() {
 
   return (
     <div id="error-page">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <Link to="/todos">GO BACK TO HOME</Link>
+      <div className="content-wrapper">
+        <div className="text-container">
+          <h1>Oops!</h1>
+          <p>Sorry, an unexpected error has occurred.</p>
+          <p>Error code : 404</p>
+          <p>Here is a link to be helpful for you :</p>
+          <Link className='link' to="/todos">GO BACK TO HOME</Link>
+        </div>
+        <div className="image-container">
+          <img src="https://www.pokepedia.fr/images/4/44/Psykokwak-RFVF.png" alt="Psykokwak" />
+        </div>
+      </div>
     </div>
   )
 }
