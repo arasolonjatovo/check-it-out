@@ -51,4 +51,5 @@ Démarrer le serveur
 -  Lucas Miranda [@mirandalucas52](https://github.com/mirandalucas52)
 -  Léo Sun [@Feydai](https://github.com/Feydai)
 -  Audrey Rasolonjatovo [@arasolonjatovo](https://www.github.com/arasolonjatovo)
+-  Kylian REKIK [@DreaDrea8](https://github.com/DreaDrea8)
 
