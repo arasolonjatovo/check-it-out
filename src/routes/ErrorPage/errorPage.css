@@ -1,7 +1,54 @@
 #error-page {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background-color: var(--primaryColor);
   height: 100vh;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 1200px;
+}
+
+.image-container {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.text-container {
+  flex: 1;
+  text-align: left;
+  padding: 20px;
+}
+
+#error-page h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+#error-page p {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+a {
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+a:hover {
+  color: #45a049;
 }
