@@ -16,7 +16,7 @@ import {
   getDocs,
   getDoc,
 } from 'firebase/firestore'
-import { db, auth } from '../../firebase/firebase'
+import { db } from '../../firebase/firebase'
 
 export default function Todos() {
   const { userEmail, userID } = useContext(UserContext)
