@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './TodoEmailList.css'
 import Button from '../Button/Button'
 import { db } from '../../firebase/firebase'
 import {
   collection,
-  getDoc,
   getDocs,
   query,
   where,
@@ -15,10 +14,8 @@ import { useParams } from 'react-router-dom'
 
 export default function TodoEmailList({ mails }) {
   const [newEmail, setNewEmail] = useState('')
-  const [emails, setEmails] = useState([])
-  const { id } = useParams()
 
-  const [todos, setTodos] = useState([])
+  const { id } = useParams()
 
   const addEmail = async () => {
     const userQuery = query(
@@ -29,11 +26,8 @@ export default function TodoEmailList({ mails }) {
     const querySnapshot = await getDocs(userQuery)
 
     if (querySnapshot.empty) {
-      // Handle the case where no documents match the query.
       return
     }
-
-    // Assuming there's only one matching document, you can access it like this.
     const userDoc = querySnapshot.docs[0]
 
     setNewEmail('')
@@ -43,9 +37,8 @@ export default function TodoEmailList({ mails }) {
       email: newEmail,
     }
 
-    const myNewMails = mails.slice() // Create a copy of the array
+    const myNewMails = mails.slice()
     myNewMails.push(myMail)
-    setEmails(myNewMails)
 
     const docRef = doc(db, 'todo', id)
     await updateDoc(docRef, { user: myNewMails })
