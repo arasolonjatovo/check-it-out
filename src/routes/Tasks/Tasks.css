@@ -23,11 +23,11 @@
   justify-content: center;
 }
 
-.todo ul {
+.todoUl {
   margin-top: 3rem;
 }
 
-.todo ul li {
+.todo ul .task {
   list-style: none;
   border-bottom: 1px rgb(198, 198, 198) solid;
   display: flex;

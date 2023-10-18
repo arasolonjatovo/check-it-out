@@ -1,47 +1,48 @@
-import React, { useState } from 'react';
-import './Tasks.css';
-import Button from '../../components/Button/Button';
-import InputText from '../../components/InputText/InputText';
+import React, { useState } from 'react'
+import './Tasks.css'
+import Button from '../../components/Button/Button'
+import InputText from '../../components/InputText/InputText'
+import TodoEmailList from '../../components/TodoEmailList/'
 
 export default function Gestion() {
-  const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState('');
-  const [filter, setFilter] = useState('all');
+  const [tasks, setTasks] = useState([])
+  const [newTask, setNewTask] = useState('')
+  const [filter, setFilter] = useState('all')
 
   const addTask = () => {
     if (newTask) {
-      const taskId = new Date().getTime();
-      setTasks([{ id: taskId, text: newTask, completed: false }, ...tasks]);
-      setNewTask('');
+      const taskId = new Date().getTime()
+      setTasks([{ id: taskId, text: newTask, completed: false }, ...tasks])
+      setNewTask('')
     }
   }
-  
+
   const deleteTask = (taskId) => {
-    const updatedTasks = tasks.filter((task) => task.id !== taskId);
-    setTasks(updatedTasks);
+    const updatedTasks = tasks.filter((task) => task.id !== taskId)
+    setTasks(updatedTasks)
   }
 
   const toggleTaskCompletion = (taskId) => {
     const updatedTasks = tasks.map((task) => {
       if (task.id === taskId) {
-        return { ...task, completed: !task.completed };
+        return { ...task, completed: !task.completed }
       }
-      return task;
-    });
-    setTasks(updatedTasks);
+      return task
+    })
+    setTasks(updatedTasks)
   }
 
   const handleFilterClick = (filterType) => {
-    setFilter(filterType);
+    setFilter(filterType)
   }
 
   const filteredTasks = tasks.filter((task) => {
     if (filter === 'completed') {
-      return task.completed;
+      return task.completed
     } else if (filter === 'uncompleted') {
-      return !task.completed;
+      return !task.completed
     } else {
-      return true;
+      return true
     }
   })
 
@@ -58,7 +59,7 @@ export default function Gestion() {
             onChange={(e) => setNewTask(e.target.value)}
           />
 
-          <Button label="ADD" handleClick={addTask} variant="primary" />
+          <Button label="ADD TASK" handleClick={addTask} variant="primary" />
         </div>
 
         <div className="filterBtn">
@@ -79,7 +80,7 @@ export default function Gestion() {
           />
         </div>
 
-        <ul>
+        <ul className="todoUl">
           {filteredTasks.map((task) => (
             <li className="task" key={task.id}>
               <span
@@ -105,6 +106,7 @@ export default function Gestion() {
             </li>
           ))}
         </ul>
+        <TodoEmailList />
       </div>
     </>
   )
