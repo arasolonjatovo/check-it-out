@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { UserContext } from '../context/userContext'
+
 export default function PrivateRoute(props) {
-  const [login, setLogin] = useState(false)
+  const { userID } = useContext(UserContext)
   const navigation = useNavigate()
 
   useEffect(() => {
-    if (!login) navigation('/signIn')
-  }, [login])
+    //if the userID isn't as its default state it means that the user is connected
+    if (!userID) navigation('/signIn')
+  }, [userID, navigation])
 
   return <>{props.children}</>
 }
