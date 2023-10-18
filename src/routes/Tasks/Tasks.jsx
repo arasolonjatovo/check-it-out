@@ -6,14 +6,9 @@ import TodoEmailList from '../../components/TodoEmailList'
 import { db } from '../../firebase/firebase'
 import { useParams } from 'react-router-dom'
 import {
-  addDoc,
-  collection,
-  serverTimestamp,
   onSnapshot,
-  deleteDoc,
   doc,
   updateDoc,
-  getDoc,
 } from 'firebase/firestore'
 
 export default function Tasks() {
@@ -21,84 +16,52 @@ export default function Tasks() {
   const [newTask, setNewTask] = useState('')
   const [filter, setFilter] = useState('all')
   const { id } = useParams()
-  const todoId = id
 
   useEffect(() => {
-    const todoCollectionRef = collection(db, 'todo', todoId, 'tasks')
+    const todoCollectionRef = doc(db, 'todo', id)
 
     const unsubscribe = onSnapshot(todoCollectionRef, (querySnapshot) => {
-      const tasksData = querySnapshot.docs.map((doc) => ({
-        id: doc.id, 
-        ...doc.data(),
-      }))
-      setTasks(tasksData)
+      console.log(querySnapshot.data())
+      setTasks(querySnapshot.data().tasks)
     })
 
     return unsubscribe
-  }, [todoId])
+  }, [id])
 
   const addTask = async () => {
-    if (newTask) {
-      try {
-        const taskData = {
-          text: newTask,
-          completed: false,
-          created_at: serverTimestamp(),
-        }
+    setNewTask('')
 
-        const todoCollectionRef = collection(db, 'todo', todoId, 'tasks')
-
-       
-        await addDoc(todoCollectionRef, taskData)
-
-    
-        setTasks([...tasks, taskData])
-        setNewTask('')
-      } catch (error) {
-        console.error("Erreur lors de l'ajout de la tâche :", error)
-      }
+    const myTask = {
+      name: newTask,
+      completed: false,
+      id: Date.now(),
     }
+
+    const myNewTasks = tasks
+    myNewTasks.push(myTask)
+    setTasks(myNewTasks)
+    const docRef = doc(db, 'todo', id)
+    await updateDoc(docRef, { tasks: myNewTasks })
   }
 
   const deleteTask = async (taskId) => {
-    try {
-      const taskDocRef = doc(db, 'todo', todoId, 'tasks', taskId)
-      await deleteDoc(taskDocRef)
+    const myNewTasks = tasks
 
-   
-      const updatedTasks = tasks.filter((task) => task.id !== taskId)
-      setTasks(updatedTasks)
-    } catch (error) {
-      console.error('Erreur lors de la suppression de la tâche :', error)
-    }
+    const dropTab = myNewTasks.filter((myNewTask) => myNewTask.id !== taskId)
+    setTasks(dropTab)
+    const docRef = doc(db, 'todo', id)
+    await updateDoc(docRef, { tasks: dropTab })
   }
 
   const toggleTaskCompletion = async (taskId) => {
-    try {
-    
-      const taskDocRef = doc(db, 'todo', todoId, 'tasks', taskId)
+    const updatedTask = [...tasks]
+    const taskToUpdate = updatedTask.find((task) => task.id === taskId)
 
-      const taskDoc = await getDoc(taskDocRef)
-      if (taskDoc.exists()) {
-        const currentStatus = taskDoc.data().completed
-
-        const newCompletionStatus = !currentStatus
-
-        await updateDoc(taskDocRef, {
-          completed: newCompletionStatus,
-        })
-
-        const updatedTasks = tasks.map((task) => {
-          if (task.id === taskId) {
-            return { ...task, completed: newCompletionStatus }
-          }
-          return task
-        })
-
-        setTasks(updatedTasks)
-      }
-    } catch (error) {
-      console.error('Erreur lors de la mise à jour de la tâche :', error)
+    if (taskToUpdate) {
+      taskToUpdate.completed = !taskToUpdate.completed
+      setTasks(updatedTask)
+      const docRef = doc(db, 'todo', id)
+      await updateDoc(docRef, { tasks: updatedTask })
     }
   }
 
@@ -158,7 +121,7 @@ export default function Tasks() {
                   textDecoration: task.completed ? 'line-through' : 'none',
                 }}
               >
-                {task.text}
+                {task.name}
               </span>
               <span className="deleteCheck">
                 <input

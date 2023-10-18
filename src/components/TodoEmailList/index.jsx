@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './TodoEmailList.css'
 import Button from '../Button/Button'
 import { db } from '../../firebase/firebase'
-import { collection, getDocs, addDoc, query, where } from 'firebase/firestore'
+import { collection, getDocs, addDoc, query } from 'firebase/firestore'
 import { useParams } from 'react-router-dom'
 
 export default function TodoEmailList() {
