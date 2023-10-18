@@ -71,3 +71,7 @@
       height: 100vh;
     }
   } 
+
+  .error {
+    color: red;
+  }
