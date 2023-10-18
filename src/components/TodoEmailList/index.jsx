@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './TodoEmailList.css'
 import Button from '../Button/Button'
-import { db } from '../firebase/firebase'
+import { db } from '../../firebase/firebase'
 import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore'
 
 export default function TodoEmailList() {
