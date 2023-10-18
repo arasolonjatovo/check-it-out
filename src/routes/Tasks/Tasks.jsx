@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Tasks.css'
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
-import TodoEmailList from '../../components/TodoEmailList/'
+import TodoEmailList from '../../components/TodoEmailList'
 import { db } from '../../firebase/firebase'
 import {
   addDoc,
@@ -14,16 +14,16 @@ import {
   updateDoc,
 } from 'firebase/firestore'
 
-export default function Gestion() {
+export default function Tasks() {
   const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState('')
   const [filter, setFilter] = useState('all')
 
   useEffect(() => {
-    const tasksCollection = collection(db, 'TodoList')
+    const tasksCollection = collection(db, 'visu-tasks')
     const unsubscribe = onSnapshot(tasksCollection, (querySnapshot) => {
       const tasksData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
+        id: doc.id, // Utilisez l'ID du document comme identifiant unique
         ...doc.data(),
       }))
       setTasks(tasksData)
@@ -40,8 +40,8 @@ export default function Gestion() {
           completed: false,
           created_at: serverTimestamp(),
         }
-        const docRef = await addDoc(collection(db, 'TodoList'), taskData)
-        const taskId = docRef.id // Récupére l'ID généré pour la tâche
+        const docRef = await addDoc(collection(db, 'visu-tasks'), taskData)
+        const taskId = docRef.id // Récupère l'ID généré pour la tâche
         setTasks([...tasks, { id: taskId, ...taskData }])
         setNewTask('')
       } catch (error) {
@@ -53,7 +53,9 @@ export default function Gestion() {
   const deleteTask = (taskId) => {
     // Supprime la tâche de la base de données
     try {
-      deleteDoc(doc(db, 'TodoList', taskId))
+
+      deleteDoc(doc(db, 'visu-tasks', taskId))
+
     } catch (error) {
       console.error('Erreur lors de la suppression de la tâche :', error)
     }
@@ -68,7 +70,7 @@ export default function Gestion() {
       if (task.id === taskId) {
         const newCompletionStatus = !task.completed
         try {
-          updateDoc(doc(db, 'TodoList', taskId), {
+          updateDoc(doc(db, 'visu-tasks', taskId), {
             completed: newCompletionStatus,
           })
         } catch (error) {

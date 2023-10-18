@@ -7,13 +7,6 @@
   border: none;
 }
 
-.emailList svg {
-  height: 20px;
-  width: 20px;
-  color: red;
-  cursor: pointer; 
-}
-
 .emailList li {
   display: flex;
   align-items: center;
