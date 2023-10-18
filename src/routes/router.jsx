@@ -10,12 +10,11 @@ import Tasks from './Tasks/Tasks'
 
 const routes = [
   {
-    path: '/signIn',
+    path: '/',
     element: <Auth />,
   },
   {
     element: <Root />,
-    // path: '/',
     errorElement: <ErrorPage />,
     children: [
       {
