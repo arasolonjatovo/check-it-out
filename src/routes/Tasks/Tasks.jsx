@@ -5,16 +5,13 @@ import InputText from '../../components/InputText/InputText'
 import TodoEmailList from '../../components/TodoEmailList'
 import { db } from '../../firebase/firebase'
 import { useParams } from 'react-router-dom'
-import {
-  onSnapshot,
-  doc,
-  updateDoc,
-} from 'firebase/firestore'
+import { onSnapshot, doc, updateDoc } from 'firebase/firestore'
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState('')
   const [filter, setFilter] = useState('all')
+  const [mails, setMails] = useState([])
   const { id } = useParams()
 
   useEffect(() => {
@@ -22,7 +19,8 @@ export default function Tasks() {
 
     const unsubscribe = onSnapshot(todoCollectionRef, (querySnapshot) => {
       console.log(querySnapshot.data())
-      setTasks(querySnapshot.data().tasks)
+      setTasks(querySnapshot.data()?.tasks)
+      setMails(querySnapshot.data()?.user)
     })
 
     return unsubscribe
@@ -139,7 +137,7 @@ export default function Tasks() {
             </li>
           ))}
         </ul>
-        <TodoEmailList />
+        <TodoEmailList mails={mails} />
       </div>
     </>
   )
