@@ -9,7 +9,7 @@ export default function ErrorPage() {
     <div id="error-page">
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
-      <Link to="/">GO BACK TO SAFE PLACE</Link>
+      <Link to="/todos">GO BACK TO HOME</Link>
     </div>
   )
 }
