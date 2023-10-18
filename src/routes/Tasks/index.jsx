@@ -1,31 +1,80 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Tasks.css'
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
 import TodoEmailList from '../../components/TodoEmailList/'
+import { db } from '../../firebase/firebase'
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  onSnapshot,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from 'firebase/firestore'
 
 export default function Gestion() {
   const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState('')
   const [filter, setFilter] = useState('all')
 
-  const addTask = () => {
+  useEffect(() => {
+    const tasksCollection = collection(db, 'TodoList')
+    const unsubscribe = onSnapshot(tasksCollection, (querySnapshot) => {
+      const tasksData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }))
+      setTasks(tasksData)
+    })
+
+    return unsubscribe
+  }, [])
+
+  const addTask = async () => {
     if (newTask) {
-      const taskId = new Date().getTime()
-      setTasks([{ id: taskId, text: newTask, completed: false }, ...tasks])
-      setNewTask('')
+      try {
+        const taskData = {
+          text: newTask,
+          completed: false,
+          created_at: serverTimestamp(),
+        }
+        const docRef = await addDoc(collection(db, 'TodoList'), taskData)
+        const taskId = docRef.id // Récupére l'ID généré pour la tâche
+        setTasks([...tasks, { id: taskId, ...taskData }])
+        setNewTask('')
+      } catch (error) {
+        console.error("Erreur lors de l'ajout de la tâche :", error)
+      }
     }
   }
 
   const deleteTask = (taskId) => {
+    // Supprime la tâche de la base de données
+    try {
+      deleteDoc(doc(db, 'TodoList', taskId))
+    } catch (error) {
+      console.error('Erreur lors de la suppression de la tâche :', error)
+    }
+
+    // Mettre à jour la liste de tâches locale
     const updatedTasks = tasks.filter((task) => task.id !== taskId)
     setTasks(updatedTasks)
   }
 
-  const toggleTaskCompletion = (taskId) => {
+  const toggleTaskCompletion = async (taskId) => {
     const updatedTasks = tasks.map((task) => {
       if (task.id === taskId) {
-        return { ...task, completed: !task.completed }
+        const newCompletionStatus = !task.completed
+        try {
+          updateDoc(doc(db, 'TodoList', taskId), {
+            completed: newCompletionStatus,
+          })
+        } catch (error) {
+          console.error('Erreur lors de la mise à jour de la tâche :', error)
+        }
+        return { ...task, completed: newCompletionStatus }
       }
       return task
     })

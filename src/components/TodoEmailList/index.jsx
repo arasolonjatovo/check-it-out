@@ -42,7 +42,7 @@ export default function TodoEmailList() {
   const deleteEmail = async (id) => {
     try {
       await deleteDoc(doc(db, 'test', id))
-      // Mettez à jour l'état local pour exclure l'e-mail supprimé
+      // Met à jour l'état local pour exclure l'e-mail supprimé
       const updatedTodos = todos.filter((todo) => todo.id !== id)
       setTodos(updatedTodos)
     } catch (error) {
