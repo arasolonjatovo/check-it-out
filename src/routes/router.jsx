@@ -15,7 +15,7 @@ const routes = [
   },
   {
     element: <Root />,
-    path: '/',
+    // path: '/',
     errorElement: <ErrorPage />,
     children: [
       {
