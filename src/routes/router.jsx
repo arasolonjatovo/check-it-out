@@ -16,7 +16,7 @@ const routes = [
         element: <Todos />,
       },
       {
-        path: '/tasks:id',
+        path: '/todos:id',
         element: <Tasks />,
       },
     ],
