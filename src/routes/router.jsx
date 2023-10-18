@@ -27,7 +27,7 @@ const routes = [
         ),
       },
       {
-        path: '/todo:id',
+        path: '/todo/:id',
         element: (
           <PrivateRoute>
             <Tasks />
