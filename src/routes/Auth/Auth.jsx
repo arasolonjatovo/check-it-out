@@ -40,10 +40,6 @@ const Auth = () => {
       authSignIn(email, password)
         .then((user) => {
           setUserEmail(user.email)
-          console.log(
-            '🚀 ~ file: Auth.jsx:43 ~ .then ~ user.email:',
-            user.email
-          )
           setUserID(user.uid)
           nav('/todo')
         })
@@ -52,7 +48,9 @@ const Auth = () => {
         })
     } else {
       authSignOut(email, password)
-        .then(() => {
+        .then((user) => {
+          setUserEmail(user.email)
+          setUserID(user.uid)
           nav('/todo')
         })
         .catch((error) => {
