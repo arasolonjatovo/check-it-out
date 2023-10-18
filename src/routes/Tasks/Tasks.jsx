@@ -28,7 +28,7 @@ export default function Tasks() {
 
     const unsubscribe = onSnapshot(todoCollectionRef, (querySnapshot) => {
       const tasksData = querySnapshot.docs.map((doc) => ({
-        id: doc.id, // Utilisez l'ID du document comme identifiant unique
+        id: doc.id, 
         ...doc.data(),
       }))
       setTasks(tasksData)
@@ -46,14 +46,12 @@ export default function Tasks() {
           created_at: serverTimestamp(),
         }
 
-        // Construction du chemin vers la sous-collection de la "todo" spécifique
-        // Utilisez l'ID de la "todo" récupéré via useParams()
         const todoCollectionRef = collection(db, 'todo', todoId, 'tasks')
 
-        // Ajoutez la tâche à la sous-collection
+       
         await addDoc(todoCollectionRef, taskData)
 
-        // Mettez à jour l'état local si nécessaire
+    
         setTasks([...tasks, taskData])
         setNewTask('')
       } catch (error) {
@@ -67,7 +65,7 @@ export default function Tasks() {
       const taskDocRef = doc(db, 'todo', todoId, 'tasks', taskId)
       await deleteDoc(taskDocRef)
 
-      // Mettre à jour la liste de tâches locale en excluant la tâche supprimée
+   
       const updatedTasks = tasks.filter((task) => task.id !== taskId)
       setTasks(updatedTasks)
     } catch (error) {
@@ -77,23 +75,19 @@ export default function Tasks() {
 
   const toggleTaskCompletion = async (taskId) => {
     try {
-      // Récupérer la référence du document de la tâche spécifique
+    
       const taskDocRef = doc(db, 'todo', todoId, 'tasks', taskId)
 
-      // Récupérer le document actuel pour obtenir le statut de complétion
       const taskDoc = await getDoc(taskDocRef)
       if (taskDoc.exists()) {
         const currentStatus = taskDoc.data().completed
 
-        // Calculer le nouveau statut de complétion
         const newCompletionStatus = !currentStatus
 
-        // Mettre à jour le document de la tâche avec le nouveau statut
         await updateDoc(taskDocRef, {
           completed: newCompletionStatus,
         })
 
-        // Mettre à jour la liste de tâches locale avec le nouveau statut
         const updatedTasks = tasks.map((task) => {
           if (task.id === taskId) {
             return { ...task, completed: newCompletionStatus }
