@@ -20,6 +20,9 @@ const Auth = () => {
   };
 
   const handleFormSubmit = () => {
+
+    setError('');
+    
     if (!email || !password) {
       setError('Please fill in all fields.');
       return;
@@ -30,12 +33,23 @@ const Auth = () => {
       return;
     }
 
+
+
     if (showSignup) {
-      authSignIn(email, password);
-      nav('/');
+      authSignIn(email, password)
+      .then(() => {
+        nav('/');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     } else {
-      authSignOut(email, password);
-      nav('/');
+      authSignOut(email, password).then(() => {
+        nav('/');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     }
   };
 
