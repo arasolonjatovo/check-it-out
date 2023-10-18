@@ -9,7 +9,7 @@ export default function PrivateRoute(props) {
 
   useEffect(() => {
     //if the userID isn't as its default state it means that the user is connected
-    if (!userID) navigation('/signIn')
+    if (userID === 'null') navigation('/signIn')
   }, [userID, navigation])
 
   return <>{props.children}</>
