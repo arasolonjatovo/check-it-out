@@ -13,10 +13,15 @@ export default function ErrorPage() {
           <p>Sorry, an unexpected error has occurred.</p>
           <p>Error code : 404</p>
           <p>Here is a link to be helpful for you :</p>
-          <Link className='link' to="/todos">GO BACK TO HOME</Link>
+          <Link className="link" to="/todo">
+            GO BACK TO HOME
+          </Link>
         </div>
         <div className="image-container">
-          <img src="https://www.pokepedia.fr/images/4/44/Psykokwak-RFVF.png" alt="Psykokwak" />
+          <img
+            src="https://www.pokepedia.fr/images/4/44/Psykokwak-RFVF.png"
+            alt="Psykokwak"
+          />
         </div>
       </div>
     </div>
