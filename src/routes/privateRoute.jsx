@@ -2,7 +2,7 @@ import React from 'react'
 
 import Root from './Root/Root'
 import Todos from './Todos/Todos'
-import Tasks from './Tasks'
+import Tasks from './Tasks/Tasks'
 import ErrorPage from './ErrorPage/ErrorPage'
 
 export default function privateRoute() {
